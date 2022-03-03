@@ -1,31 +1,54 @@
-version: "2"
+version: '3.12' 
 
-services:
-  faraday-server-db:
-    image: postgres:9.6
-    volumes:
-      - "faraday-server-db-data:/var/lib/postgresql/data"
-    env_file:
-      - ./faraday-server-db.env
-    restart: unless-stopped
+services: 
+  server: 
+    image: faradaysec/faraday:latest
+    environment: 
+      - LISTEN_ADDR=0.0.0.0 
+      - PGSQL_HOST=10.10.10.10
+      - PGSQL_USER=faraday_postgresql 
+      - PGSQL_PASSWD=paasword
+      - PGSQL_DBNAME=faraday
+    ports: 
+      - 5985:5985 
+    volumes: 
+      - ~/.faraday/storage:/faraday-storage 
+    deploy: 
+      replicas: 1 
+      placement: 
+        constraints: [node.role == manager] 
+secrets: 
+  pgsql_passwd: 
+    external: true
 
-  faraday-server-app:
-    build: ./images/faraday-server
-    image: faradaysec/faraday:3.19.0
-    ports:
-      - "5985:5985"
-      - "9000:9000"
-    volumes:
-      - "faraday-server-app-data:/root/.faraday"
-    environment:
-      - POSTGRES_HOST=faraday-server-db
-    env_file:
-      - ./faraday-server-db.env
-      - ./faraday-server-app.env
-    depends_on:
-      - faraday-server-db
-    restart: unless-stopped
+# version: "2"
 
-volumes:
-  faraday-server-db-data:
-  faraday-server-app-data:
+# services:
+#   faraday-server-db:
+#     image: postgres:9.6
+#     volumes:
+#       - "faraday-server-db-data:/var/lib/postgresql/data"
+#     env_file:
+#       - ./faraday-server-db.env
+#     restart: unless-stopped
+
+#   faraday-server-app:
+#     build: ./images/faraday-server
+#     image: faradaysec/faraday:3.19.0
+#     ports:
+#       - "5985:5985"
+#       - "9000:9000"
+#     volumes:
+#       - "faraday-server-app-data:/root/.faraday"
+#     environment:
+#       - POSTGRES_HOST=faraday-server-db
+#     env_file:
+#       - ./faraday-server-db.env
+#       - ./faraday-server-app.env
+#     depends_on:
+#       - faraday-server-db
+#     restart: unless-stopped
+
+# volumes:
+#   faraday-server-db-data:
+#   faraday-server-app-data:
