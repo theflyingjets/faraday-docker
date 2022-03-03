@@ -20,7 +20,7 @@ RUN git clone https://github.com/infobyte/faraday.git
 
 # Checkout a stable release version
 WORKDIR /root/faraday
-RUN git checkout tags/v3.1.1 -b v3.1.1
+RUN git checkout tags/v3.19.0 -b v3.19.0
 
 # Install the server's system dependencies
 RUN apt install -y  python build-essential ipython \
@@ -33,7 +33,7 @@ RUN apt install -y  python build-essential ipython \
 RUN pip install -U -r requirements_server.txt
 
 # Temporary fix for incompatible dependency
-RUN pip install --force-reinstall itsdangerous==0.24
+# RUN pip install --force-reinstall itsdangerous==0.24
 
 # Apply default configuration files
 RUN mkdir -p /root/.faraday/config && \
