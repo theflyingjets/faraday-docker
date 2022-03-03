@@ -6,6 +6,7 @@ services:
     environment: 
       - LISTEN_ADDR=0.0.0.0 
       - PGSQL_HOST=10.10.10.10
+      - PGSQL_PORT=5432
       - PGSQL_USER=faraday_postgresql 
       - PGSQL_PASSWD=paasword
       - PGSQL_DBNAME=faraday
@@ -17,9 +18,6 @@ services:
       replicas: 1 
       placement: 
         constraints: [node.role == manager] 
-secrets: 
-  pgsql_passwd: 
-    external: true
 
 # version: "2"
 
