@@ -17,6 +17,7 @@ RUN apt update && apt install -y git
 # Close faraday git repository
 WORKDIR /root
 RUN git clone https://github.com/infobyte/faraday.git
+RUN git clone https://github.com/infobyte/faraday_angular_frontend.git faraday/frontend
 
 # Checkout a stable release version
 WORKDIR /root/faraday
@@ -30,7 +31,8 @@ RUN apt install -y  python build-essential ipython \
     libpng-dev libpq-dev
 
 # Install the server's python dependencies
-RUN pip install -U -r requirements.txt
+WORKDIR /root/faraday
+RUN pip install .
 
 # Temporary fix for incompatible dependency
 # RUN pip install --force-reinstall itsdangerous==0.24
