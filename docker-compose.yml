@@ -13,11 +13,7 @@ services:
     ports: 
       - 5985:5985 
     volumes: 
-      - ~/.faraday/storage:/faraday-storage 
-    deploy: 
-      replicas: 1 
-      placement: 
-        constraints: [node.role == manager] 
+      - ~/.faraday/storage:/faraday-storage
 
 # version: "2"
 
