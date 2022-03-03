@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM faradaysec/faraday:latest
 
 # Update and install wget
 RUN apt update
