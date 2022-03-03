@@ -30,7 +30,7 @@ RUN apt install -y  python build-essential ipython \
     libpng-dev libpq-dev
 
 # Install the server's python dependencies
-RUN pip install -U -r requirements_server.txt
+RUN pip install -U -r requirements.txt
 
 # Temporary fix for incompatible dependency
 # RUN pip install --force-reinstall itsdangerous==0.24
