@@ -11,4 +11,6 @@ RUN wget https://github.com/infobyte/faraday/releases/download/v3.19.0/faraday-s
 WORKDIR /root
 RUN dpkg -i faraday-server_amd64.deb
 
-RUN faraday-manage initdb
+# RUN apt install postgresql-server postgresql-client
+
+# RUN faraday-manage initdb
