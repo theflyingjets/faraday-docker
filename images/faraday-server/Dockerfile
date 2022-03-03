@@ -1,7 +1,7 @@
 # FROM ubuntu:18.04
 
-# # Update and install wget
-# RUN apt update && apt install wget -y
+# Update and install wget
+RUN apt update
 
 # # Close faraday git repository
 # WORKDIR /root
